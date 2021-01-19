@@ -1,2 +1,2 @@
 # InterviewPrep
-LeetCode and Hackerranks with solution explanations and runtime/space analysis
+LeetCode and HackerRank with solution explanations and runtime/space analysis
