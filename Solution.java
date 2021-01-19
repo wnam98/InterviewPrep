@@ -158,6 +158,10 @@ public class Solution{
         return Math.max(maxDepthBST(root.left), maxDepthBST(root.right)) + 1;
     }
 
+    public boolean isSymmetric(TreeNode root){
+        return root == null;
+    }
+
 
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
