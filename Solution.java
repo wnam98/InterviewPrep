@@ -159,9 +159,17 @@ public class Solution{
     }
 
     public boolean isSymmetric(TreeNode root){
-        return root == null;
+        if(root == null) return true;
+        return isSymmetricHelper(root.left, root.right);
     }
 
+    public boolean isSymmetricHelper(TreeNode left, TreeNode right){
+        if(left == null || right == null){
+            return left == right;
+        }
+        if(left.val != right.val) return false;
+        return isSymmetricHelper(left.left, right.right) && isSymmetricHelper(left.right, right.left);
+    }
 
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
@@ -237,6 +245,7 @@ public class Solution{
         return dummy.next;
     }
 
+    //------------------------------Graph Questions-----------------------------------------------------------//
 	// Definition for a Node.
     class Node {
 	    public int val;
@@ -260,7 +269,7 @@ public class Solution{
     
     HashMap<Node, Node> found = new HashMap<>();
 
-    /**
+    /**LeetCode Medium
      * Given a reference of a node in a connected undirected graph. 
      * Return a deep copy (clone) of the graph.
      * @param "root" pointer node
