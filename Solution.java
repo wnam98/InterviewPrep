@@ -38,6 +38,12 @@ public class Solution{
         reverseArray(nums, k, nums.length - 1);
     }
 
+    /***
+     * Auxillary array reversal method for rotateArray.
+     * @param array Input Array
+     * @param start First index to begin reversal
+     * @param end Last index of reversal
+     */
     public void reverseArray(int[] array, int start, int end){
         while(start < end){
             int temp = array[start];
@@ -48,6 +54,9 @@ public class Solution{
         }
     }
 
+    /***
+     * Driver method
+     */
     public static void main(String[] args){
         int[] array = {1,2,3,4,5};
         int target = 7;
