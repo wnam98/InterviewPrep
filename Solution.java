@@ -3,9 +3,9 @@ import java.util.*;
 public class Solution{
 
     /***
-     * LeetCode Easy, popular question asked by Google
+     * LeetCode Easy, popular question asked by Google <p>
      *Runtime: O(n) one for-loop that traverses through the elements of the array.
-     * Space: O(n) new hashset will add all values in nums in the worst case.
+     * Space: O(n) new hashset will add all values in nums in the worst case.</p>
      * @param nums List of numbers
      * @param target Target sum of any two numbers in the above list.
      */
@@ -22,11 +22,41 @@ public class Solution{
         }return solution;
     }
 
+    /***
+     * LeetCode medium, popular question asked by Google <p>
+     *     Runtime: O(n) because the first step requires rotating the whole array.
+     *     Space: O(1) all the rotating is performed in-place.
+     * </p>
+     * @param nums List of numbers to be rotated
+     * @param k Bound of reversal
+     */
+
+    public void rotateArray(int[] nums, int k){
+        k = k % nums.length;
+        reverseArray(nums, 0, nums.length - 1);
+        reverseArray(nums, 0, k - 1);
+        reverseArray(nums, k, nums.length - 1);
+    }
+
+    public void reverseArray(int[] array, int start, int end){
+        while(start < end){
+            int temp = array[start];
+            array[start] = array[end];
+            array[end] = temp;
+            start++;
+            end--;
+        }
+    }
 
     public static void main(String[] args){
         int[] array = {1,2,3,4,5};
         int target = 7;
+
         Solution solution = new Solution();
         System.out.println(Arrays.toString(solution.twoSum(array, target)));
+
+        int k = 2;
+        solution.rotateArray(array, k);
+        System.out.println(Arrays.toString(array));
     }
 }
