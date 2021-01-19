@@ -1,11 +1,17 @@
 import java.util.*;
 
 public class Solution{
-
+    //------------------------------Array Questions-----------------------------------------------------------//
     /***
      * LeetCode Easy, popular question asked by Google <p>
      *Runtime: O(n) one for-loop that traverses through the elements of the array.
      * Space: O(n) new hashset will add all values in nums in the worst case.</p>
+     *<p>
+     * Explanation: Create a hashmap that maps the array elements to their indices. Then create
+     * a new variable difference which is the difference between target and an element at a specific
+     * index during iteration. If there exists an element in the array that equals the difference, add that element
+     * to the solution vector along with its index.
+     *</p>
      * @param nums List of numbers
      * @param target Target sum of any two numbers in the above list.
      */
@@ -26,6 +32,11 @@ public class Solution{
      * LeetCode medium, popular question asked by Google <p>
      *     Runtime: O(n) because the first step requires rotating the whole array.
      *     Space: O(1) all the rotating is performed in-place.
+     * </p>
+     * <p>
+     *  Explanation: Reverse all the elements in the array. Then reverse the elements again from the
+     *  first index to the k - 1th index. Finally, reverse the remaining elements of the array and now
+     *  you have your rotated array.
      * </p>
      * @param nums List of numbers to be rotated
      * @param k Bound of reversal
@@ -52,6 +63,91 @@ public class Solution{
             start++;
             end--;
         }
+    }
+    //------------------------------BST Questions-----------------------------------------------------------//
+
+    /***
+     * LeetCode TreeNode definition. Contains a val, constructor, and references to its children.
+     */
+    public class TreeNode{
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(){}
+        TreeNode(int val){this.val = val;}
+        TreeNode(int val, TreeNode left, TreeNode right){
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+    /***
+     * LeetCode Medium, asked by Facebook
+     *<p>
+     * Runtime: O(n) because we iterate through the whole tree definitively. N is the number of nodes in the tree
+     * Space: O(n) worst case, our tree is a LinkedList with N being the number of nodes.
+     *</p>
+     * @param root the current TreeNode during iteration
+     * @return Binary Tree is a valid BST
+     */
+
+    public boolean isValidBST(TreeNode root){
+        return BSTHelper(root, null, null);
+    }
+
+    /***
+     * Auxillary recursive function for validating BST. Our base case is root == null because
+     * that means we had successfully traversed through the tree down to the leaf without hitting a
+     * condition that would return false. Finally, validate the left subtree and right subtree.
+     * @param root the current TreeNode at iteration
+     * @param min (Integer object) reference to an "absolute minimum" to be compared to the left child
+     * @param max (Integer object) reference to an "absolute maximum" to be compared to the right child
+     * @return Binary Tree is a valid BST
+     */
+
+    public boolean BSTHelper(TreeNode root, Integer min, Integer max){
+        if(root == null) return true;
+        if(min != null && root.val <= min || max != null && root.val >= max){
+            return false;
+        }
+        return BSTHelper(root.left, min, root.val) && BSTHelper(root.right, root.val, max);
+    }
+
+    //------------------------------LinkedList Questions-----------------------------------------------------------//
+    /***
+     * LeetCode ListNode definition
+     */
+    public class ListNode{
+        int val;
+        ListNode next;
+        ListNode(){}
+        ListNode(int val){this.val = val;}
+        ListNode(int val, ListNode next){this.val = val; this.next = next;}
+    }
+
+    /***
+     * LeetCode Easy, asked by Amazon, failed by JomaTech
+     * <p>
+     * Explanation: Basic traversal, head = head.next until reaching null. First, have access to a previous node,
+     * so create a reference and set it to null (because there's nothing previous to the first node). Now set the
+     * head.next = prev (reverse the pointers) then set the prev to head, then head to next. Reverse all the pointers essentially,
+     * as you traverse through the list.
+     *
+     * Runtime: O(N) where N is the number of nodes in the list.
+     * Space: O(1) all the reversing is done in-place.
+     * </p>
+     * @param head reference to first ListNode in the list.
+     * @return reversed LinkedList
+     */
+
+    public ListNode reverseList(ListNode head){
+        ListNode prev = null;
+        while(head != null){
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }return prev;
     }
 
     /***
