@@ -158,6 +158,16 @@ public class Solution{
         return Math.max(maxDepthBST(root.left), maxDepthBST(root.right)) + 1;
     }
 
+    /***
+     * Recrusively check the values of left and right subtrees of root. Then check the subtrees of the children
+     * <p>
+     * Runtime: O(N) Where N is the number of nodes in the BST
+     * Space: O(N) Recursive N calls to the callstack
+     * </p>
+     * @param root Root TreeNode of whole BST
+     * @return boolean value whether left subtree is the same as right
+     */
+
     public boolean isSymmetric(TreeNode root){
         if(root == null) return true;
         return isSymmetricHelper(root.left, root.right);
@@ -171,6 +181,23 @@ public class Solution{
         return isSymmetricHelper(left.left, right.right) && isSymmetricHelper(left.right, right.left);
     }
 
+    public List<List<Integer>> levelOrder(TreeNode root){
+        List<List<Integer>> answer = new ArrayList<>();
+        if(root == null) return answer;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            List<Integer> currentLevel = new ArrayList<>();
+            for(int i = 0; i < size; i++){
+                TreeNode current = queue.remove();
+                currentLevel.add(current.val);
+                if(current.left != null) queue.add(current.left);
+                if(current.right != null) queue.add(current.right);
+            }
+            answer.add(currentLevel);
+        }return answer;
+    }
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
      * LeetCode ListNode definition
