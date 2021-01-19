@@ -29,7 +29,7 @@ public class Solution{
     }
 
     /***
-     * LeetCode medium, popular question asked by Google <p>
+     * LeetCode Medium, popular question asked by Google <p>
      *     Runtime: O(n) because the first step requires rotating the whole array.
      *     Space: O(1) all the rotating is performed in-place.
      * </p>
@@ -63,6 +63,32 @@ public class Solution{
             start++;
             end--;
         }
+    }
+
+    /***
+     * LeetCode Medium, popular question asked by Amazon.
+     * <p>
+     * The easiest solution would be to mergesort the array and then return nums.length - k.
+     * However, this is rather costly at O(k(N log N)). What do we do?
+     * We use an auxillary data structure: the minHeap. Add the elements to the minHeap until it contains
+     * k elements, then remove the kth element and return it.
+     * </p>
+     * <p>
+     * Runtime: O(N log k) Add N elements to the minHeap and the cost of remove is log k.
+     * Space: O(k) number of elements in the minHeap.
+     * </p>
+     * @param nums input array
+     * @param k index of element to be returned if sorted
+     * @return kth largest element
+     */
+    public int KthLargestArray(int[] nums, int k){
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for(int num: nums){
+            minHeap.add(num);
+            if(minHeap.size() > k){
+                minHeap.remove();
+            }
+        }return minHeap.remove();
     }
     //------------------------------BST Questions-----------------------------------------------------------//
 
@@ -132,9 +158,14 @@ public class Solution{
      * so create a reference and set it to null (because there's nothing previous to the first node). Now set the
      * head.next = prev (reverse the pointers) then set the prev to head, then head to next. Reverse all the pointers essentially,
      * as you traverse through the list.
-     *
+     *<p>
+     * prev -> head -> head.next (next)
+     * (next) head.next -> head -> prev
+     * Now prev is the new head, so return prev
+     *</p>
+     * <p>
      * Runtime: O(N) where N is the number of nodes in the list.
-     * Space: O(1) all the reversing is done in-place.
+     * Space: O(1) all the reversing is done in-place. </p>
      * </p>
      * @param head reference to first ListNode in the list.
      * @return reversed LinkedList
