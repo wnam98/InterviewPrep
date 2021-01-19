@@ -30,7 +30,7 @@ public class Solution{
 
     /***
      * LeetCode Medium, popular question asked by Google <p>
-     *     Runtime: O(n) because the first step requires rotating the whole array.
+     *     Runtime: O(N) the N elements go through three reversals.
      *     Space: O(1) all the rotating is performed in-place.
      * </p>
      * <p>
@@ -179,6 +179,38 @@ public class Solution{
             prev = head;
             head = next;
         }return prev;
+    }
+
+    /***
+     * LeetCode Hard, popular question asked by Facebook
+     * <p>
+     * Explanation: traverse through the array of all the LinkedLists and add each node to a minHeap.
+     * Create a new LinkedList and append all the ListNodes from the minHeap into the new list.
+     * </p>
+     * <p>
+     * Runtime: O(N*M log(N*M)) where N is the max number of lists and M is the max number of nodes of a list.
+     * Space: O(N*M)
+     * </p>
+     * @param lists List of LinkedLists of any size
+     * @return new sorted LinkedList
+     */
+    public ListNode mergeKSorted(ListNode[] lists){
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for(ListNode head: lists){
+            while(head != null){
+                minHeap.add(head.val);
+                head = head.next;
+            }
+        }
+
+        //create a dummy node to start the new list
+        ListNode dummy = new ListNode(-1);
+        ListNode head = dummy;
+        while(!minHeap.isEmpty()){
+            head.next = new ListNode(minHeap.remove());
+            head = head.next;
+        }
+        return dummy.next;
     }
 
     /***
