@@ -139,6 +139,26 @@ public class Solution{
         return BSTHelper(root.left, min, root.val) && BSTHelper(root.right, root.val, max);
     }
 
+    /***
+     * LeetCode Easy, Basic BST question everyone should know
+     * <p>
+     * Recursively check the depth of the left subtree and right subtree and return the max of those two.
+     * Add one to account for the root node at the top.
+     * </p>
+     * <p>
+     * Runtime: O(N) Where N is the number of Nodes in the BST. We traverse through all the nodes of the tree.
+     * Space: O(N) Because we make N calls for which the callstack will contain N elements.
+     * </p>
+     * @param root Root TreeNode of the whole BST
+     * @return Integer value of the depth of BST
+     */
+
+    public int maxDepthBST(TreeNode root){
+        if(root == null) return 0;
+        return Math.max(maxDepthBST(root.left), maxDepthBST(root.right)) + 1;
+    }
+
+
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
      * LeetCode ListNode definition
