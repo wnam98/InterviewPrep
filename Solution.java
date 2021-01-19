@@ -213,6 +213,50 @@ public class Solution{
         return dummy.next;
     }
 
+	// Definition for a Node.
+    class Node {
+	    public int val;
+	    public List<Node> neighbors;
+
+	    public Node() {
+		val = 0;
+		neighbors = new ArrayList<Node>();
+	    }
+
+	    public Node(int _val) {
+		val = _val;
+		neighbors = new ArrayList<Node>();
+	    }
+
+	    public Node(int _val, ArrayList<Node> _neighbors) {
+		val = _val;
+		neighbors = _neighbors;
+	    }
+    }
+    
+    HashMap<Node, Node> found = new HashMap<>();
+
+    /**
+     * Given a reference of a node in a connected undirected graph. 
+     * Return a deep copy (clone) of the graph.
+     * @param "root" pointer node
+     * @return the same root pointer node
+     */
+    public Node cloneGraph(Node node) {
+        if(node == null)
+            return null;
+        if(found.containsKey(node))
+            return found.get(node);
+        var newNode = new Node(node.val);
+        found.put(node, newNode);
+        List<Node> neighbors = new ArrayList<>();
+        for(Node neighbor : node.neighbors){
+            neighbors.add(cloneGraph(neighbor));
+        }
+        newNode.neighbors = neighbors;
+        return newNode;
+    }
+
     /***
      * Driver method
      */
