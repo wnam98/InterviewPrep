@@ -63,12 +63,18 @@ public class CTCI{
         return Arrays.equals(firstArr, secondArr);
     }
 
+    /***
+     * Solution using third-party library. Not sure if allowed?
+     * @param string Input String
+     * @return 'URLified' string
+     */
+    public String URLify(String string){
+        return string.replace(" ", "%20");
+    }
 
     public static void main(String[] args) {
         CTCI ctci = new CTCI();
-        String test = "ABE";
-        String second = "EBA";
-        System.out.println(ctci.isUniqueOptimal(test));
-        System.out.println(ctci.checkPermutation(test, second));
+        String test = "Mr John Smith";
+        System.out.println(ctci.URLify(test));
     }
 }
