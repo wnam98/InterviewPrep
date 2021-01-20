@@ -181,6 +181,19 @@ public class Solution{
         return isSymmetricHelper(left.left, right.right) && isSymmetricHelper(left.right, right.left);
     }
 
+    /***
+     *LeetCode Medium, asked by Amazon, Linkedin, Google
+     * <p>
+     *  Explanation: Simple BFS solution, add all the nodes to a queue and return them to get the correct order.
+     * </p>
+     * <p>
+     * Runtime: O(N) where N is the number of TreeNodes.
+     * Space: O(N) worst case, the queue will stack all the Nodes.
+     * </p>
+     * @param root reference to currnet TreeNode in traversal
+     * @return Lists of TreeNodes in the correct in-order
+     */
+
     public List<List<Integer>> levelOrder(TreeNode root){
         List<List<Integer>> answer = new ArrayList<>();
         if(root == null) return answer;
