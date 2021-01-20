@@ -90,7 +90,7 @@ public class Solution{
             }
         }return minHeap.remove();
     }
-    //------------------------------BST Questions-----------------------------------------------------------//
+    //------------------------------Binary Tree Questions-----------------------------------------------------------//
 
     /***
      * LeetCode TreeNode definition. Contains a val, constructor, and references to its children.
@@ -251,6 +251,69 @@ public class Solution{
         if(first == null || second == null)return false;
         return first.val == second.val && isSameTree(first.left, second.left)
                 && isSameTree(first.right, second.right);
+    }
+
+    /***
+     * LeetCode Easy, asked by Google.
+     * <p>
+     *     Explanation: Basecase, if the root is null, return 0. Recrusively check each node for a left child
+     *     and whether it's a leaf. Then aggregate the sum and return the value.
+     * </p>
+     * <p>
+     *     Runtime: O(N) Worst case, traverse through all N nodes of the tree.
+     *     Space: O(N) Worst case, recursive stack pushes all N nodes.
+     * </p>
+     * @param root Root Node of the input tree.
+     * @return sum of the left nodes of the tree.
+     */
+
+    public int sumOfLeftLeaves(TreeNode root){
+        if(root == null) return 0;
+        int sum = 0;
+        //check if there exists a left child of the root. Next, check if it's a leaf.
+        if(root.left != null && root.left.left == null && root.left.right == null){
+            sum += root.left.val;
+        }
+        return sum + sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+    }
+
+    /***
+     * LeetCode Medium, asked by Google.
+     * <p>
+     *     Explanation: Basic BFS because we are performing a top to bottom exploration.
+     *     Remember, an inorder traversal of a Binary Tree is left, root, right. We use a FIFO
+     *     queue to traverse a binary tree in order. We have a check to ensure that our current
+     *     reference TreeNode is indeed the right child of the root (in comparing the size of the queue
+     *     with our current iteration index). Next, we check their child and add their children to
+     *     the queue accordingly. After we break out of the while loop, we simply return the list of node values.
+     * </p>
+     * <p>
+     *     Runtime: O(N) Worst case, we traverse through all N of the nodes.
+     *     Space: O(N) Worst case, the queue pushes in all N of the nodes.
+     * </p>
+     * @param root Root node of input tree
+     * @return List of all the TreeNodes that would be seen if viewing from the right side.
+     */
+    public List<Integer> rightSideView(TreeNode root){
+        List<Integer> visibleValues = new ArrayList<>();
+        if(root == null) return visibleValues;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size; i++){
+                TreeNode current = queue.remove();
+                if(i == size - 1){
+                    visibleValues.add(current.val);
+                }
+                if(current.left != null){
+                    queue.add(current.left);
+                }
+                if(current.right != null){
+                    queue.add(current.right);
+                }
+            }
+        }return visibleValues;
     }
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
