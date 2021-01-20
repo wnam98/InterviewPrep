@@ -72,9 +72,40 @@ public class CTCI{
         return string.replace(" ", "%20");
     }
 
+    /**
+     * Approach 1: HashMap
+     * Algorithm
+     * This hashmap takes the form (character_i, number of occurences of character_i).
+     * We traverse over the given string s.
+     * For every new character found in s, we create a new entry in the map for this character with the number of occurences as 1.
+     * Whenever we find the same character again, we update the number of occurences appropriately.
+     *
+     * At the end, we traverse over the map created and find the number of characters with odd number of occurences.
+     * If this count happens to exceed 1 at any step, we conclude that a palindromic permutation isn't possible for the string s.
+     * But, if we can reach the end of the string with count lesser than 2, we conclude that a palindromic permutation is possible for s.
+     *
+     * Complexity Analysis
+     * Time complexity : O(n).
+     * We traverse over the given string s with n characters once.
+     * We also traverse over the map which can grow upto a size of n in case all characters in s are distinct.
+     * Space complexity : O(n). The hashmap can grow upto a size of n, in case all the characters in s are distinct.
+     */
+
+    public boolean PalindromePermutation(String string){
+        HashMap<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < string.length(); i++){
+            map.put(string.charAt(i), map.getOrDefault(string.charAt(i), 0) + 1);
+        }
+        int count = 0;
+        for(char key: map.keySet()){
+            count += map.get(key) % 2;
+        }
+        return count <= 1;
+    }
+
     public static void main(String[] args) {
         CTCI ctci = new CTCI();
-        String test = "Mr John Smith";
-        System.out.println(ctci.URLify(test));
+        String test = "tactcoa";
+        System.out.println(ctci.PalindromePermutation(test));
     }
 }
