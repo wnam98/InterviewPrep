@@ -211,6 +211,24 @@ public class Solution{
             answer.add(currentLevel);
         }return answer;
     }
+
+    /***
+     * Explanation: Recrusively check that p and q values in the left of the root are less than root val/
+     * Do the same for the right side.
+     * <p>
+     * Runtime: O(N) worst case, we traverse through all N nodes of the BST.
+     * Space: O(N) worst case, the recursion stack pushes all N nodes.
+     * </p>
+     * @param  root Parent Node
+     * @param p First Node of interest
+     * @param q Second Node of interest
+     * @return
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
+        if(p.val < root.val && q.val < root.val) return lowestCommonAncestor(root.left, p, q);
+        if(p.val > root.val && q.val > root.val) return lowestCommonAncestor(root.right, p, q);
+        return root;
+    }
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
      * LeetCode ListNode definition
