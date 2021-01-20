@@ -229,6 +229,29 @@ public class Solution{
         if(p.val > root.val && q.val > root.val) return lowestCommonAncestor(root.right, p, q);
         return root;
     }
+
+    /***
+     * LeetCode Easy, asked by Google
+     * <p>
+     *  Explanation: Define two bases cases, where both trees are null or either are
+     *  null. Then, recursively determine whether left and right subtrees have equivalent Node
+     *  values.
+     * </p>
+     * <p>
+     *     Runtime: O(N) worst case we traverse through all the nodes N.
+     *     Space: O(N) recursion stack will push all N nodes worst case.
+     * </p>
+     * @param first Reference to first Binary Tree
+     * @param second Reference to second Binary Tree
+     * @return boolean value whether two trees are equal
+     */
+
+    public boolean isSameTree(TreeNode first, TreeNode second){
+        if(first == null && second == null) return true;
+        if(first == null || second == null)return false;
+        return first.val == second.val && isSameTree(first.left, second.left)
+                && isSameTree(first.right, second.right);
+    }
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
      * LeetCode ListNode definition
