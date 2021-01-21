@@ -390,7 +390,7 @@ public class Solution{
     }
 
     /***
-     * LeetCode East, popular question asked by Google
+     * LeetCode Easy, popular question asked by Google
      * Detect a cycle in a LinkedList
      * <p>
      *     Explanation: slow pointer moves one node at a time and the fast moves two
@@ -412,6 +412,42 @@ public class Solution{
             fast = fast.next.next;
         }
         return true;
+    }
+
+    /***
+     * LeetCode Medium, asked by Amazon
+     * <p>
+     * Explanation: We can use a two-pointer solution, with a slow and fast pointer.
+     * We traverse the List N times until the fast pointer reaches the N + 1th index. Then we simply
+     * delete the Node at the Nth index by setting the slow pointer to next.next. We can then return
+     * the new List.
+     * </p>
+     * <p>
+     *     Runtime: O(N) worst case, we traverse through all N nodes of the list
+     *     Space: O(1) we don't allocate extra memory for a new data structure. Everything is performed
+     *     in-place.
+     * </p>
+     * @param head reference to the first ListNode in the LinkedList.
+     * @param n number of the ListNode we wish to remove.
+     * @return new shortened LinkedList.
+     */
+
+    public ListNode removeNthFromEnd(ListNode head, int n){
+        ListNode dummy = new ListNode(0);
+        dummy = head.next;
+        ListNode slow = dummy;
+        ListNode fast = dummy;
+
+        for(int i = 1; i <= n + 1; i++){
+            fast = fast.next;
+        }
+
+        while(fast != null){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        slow.next = slow.next.next;
+        return dummy.next;
     }
 
     //------------------------------Graph Questions-----------------------------------------------------------//
