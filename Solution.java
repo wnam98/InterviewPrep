@@ -159,7 +159,7 @@ public class Solution{
     }
 
     /***
-     * Recrusively check the values of left and right subtrees of root. Then check the subtrees of the children
+     * Recursively check the values of left and right subtrees of root. Then check the subtrees of the children
      * <p>
      * Runtime: O(N) Where N is the number of nodes in the BST
      * Space: O(N) Recursive N calls to the callstack
@@ -190,7 +190,7 @@ public class Solution{
      * Runtime: O(N) where N is the number of TreeNodes.
      * Space: O(N) worst case, the queue will stack all the Nodes.
      * </p>
-     * @param root reference to currnet TreeNode in traversal
+     * @param root reference to current TreeNode in traversal
      * @return Lists of TreeNodes in the correct in-order
      */
 
@@ -213,7 +213,7 @@ public class Solution{
     }
 
     /***
-     * Explanation: Recrusively check that p and q values in the left of the root are less than root val/
+     * Explanation: Recursively check that p and q values in the left of the root are less than root val/
      * Do the same for the right side.
      * <p>
      * Runtime: O(N) worst case, we traverse through all N nodes of the BST.
@@ -314,6 +314,48 @@ public class Solution{
                 }
             }
         }return visibleValues;
+    }
+
+    /***
+     * LeetCode Medium, asked by Google
+     * <p>
+     *     Explanation: Given a Binary Tree, and Nodes to delete, return the forest. We will do
+     *     a bottom-up DFS traversal, in case we are on a root node to delete and would subsequently lose
+     *     references to its children. First, we append all the values of the to_delete array into a
+     *     HashSet. We write a recursive helper function that takes in the nodes to delete list and the
+     *     list of remaining nodes to return. We include a check in-case we need to push in the root node.
+     *     Recursively check the left and right subtrees of the root to append nodes to the forest list. Else, we
+     *     return the root, or reference to the whole tree.
+     * </p>
+     * <p>
+     *     Runtime: O(N) where N is the number of nodes in the Tree.
+     *     Space: O(N) where N is the number of nodes in the Tree.
+     * </p>
+     */
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        //bottom up traversal of the Tree
+        //DFS, move down the tree move to below the trees, return null, then keep or remove
+        List<TreeNode> remaining = new ArrayList<>();
+        Set<Integer> toDelete = new HashSet<>();
+        for(int i: to_delete){
+            toDelete.add(i);
+        }
+        helper(root, toDelete, remaining);
+        if(!toDelete.contains(root.val)) remaining.add(root);
+        return remaining;
+    }
+
+    public TreeNode helper(TreeNode root, Set<Integer> toDelete, List<TreeNode> remaining){
+        if(root == null) return null;
+        root.left = helper(root.left, toDelete, remaining);
+        root.right = helper(root.right, toDelete, remaining);
+        if(toDelete.contains(root.val)) {
+            if(root.left != null) remaining.add(root.left);
+            if(root.right != null) remaining.add(root.right);
+            return null;
+        }
+
+        return root;
     }
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
