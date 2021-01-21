@@ -389,6 +389,31 @@ public class Solution{
         return dummy.next;
     }
 
+    /***
+     * LeetCode East, popular question asked by Google
+     * Detect a cycle in a LinkedList
+     * <p>
+     *     Explanation: slow pointer moves one node at a time and the fast moves two
+     *     at a time. When they collide, there's a cycle.
+     * </p>
+     * <p>
+     *     Runtime: O(N) worst case, we traverse through all N elements
+     *     Space: O(1) no extra data structure, the traversal is done in-place
+     * </p>
+     */
+
+    public boolean LinkedListCycle(ListNode head){
+        if(head == null) return false;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while(slow != fast){
+            if(slow == null || fast == null) return false;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return true;
+    }
+
     //------------------------------Graph Questions-----------------------------------------------------------//
 	// Definition for a Node.
     class Node {
