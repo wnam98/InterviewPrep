@@ -385,6 +385,34 @@ public class Solution{
 
         return root;
     }
+
+    /***
+     * LeetCode Medium, asked by Google
+     * Explanation: Find the longest consecutive sequence path from parent to child nodes.
+     * Keep a list of maximum values and recursively check their values with the TreeNode values.
+     * At each Node, check if its value is the same as the previous iteration Node + 1.
+     * Runtime: O(N) Worst case, our binary tree is a long linked list of N nodes to traverse
+     * Space: O(N) Recursive calls could also be N levels deep
+     * @param root Reference to the
+     * @return
+     */
+
+    public int longestConsecutive(TreeNode root){
+        int[] max = new int[1];
+        findLongestHelper(root, 0, 0, max);
+        return max[0];
+    }
+
+    public void findLongestHelper(TreeNode root, int count, int target, int[] max){
+        if(root == null) return;
+        if(root.val == target) count++;
+        count = 1;
+        max[0] = Math.max(max[0], count);
+        findLongestHelper(root.left, count, root.val + 1, max);
+        findLongestHelper(root.right, count, root.val + 1, max);
+    }
+
+
     //------------------------------LinkedList Questions-----------------------------------------------------------//
     /***
      * LeetCode ListNode definition
