@@ -118,6 +118,45 @@ public class Solution{
 
         return dp[grid.length-1][grid[0].length-1];
     }
+
+    /***
+     * LeetCode Medium, asked by Google
+     * <p>
+     * Explanation: Create a DFS helper method to traverse the board. Look through the grid,
+     * if we find the first letter, run the helper and look for the other characters.
+     * </p>
+     * <p>
+     * Runtime: O(N) where N is the number of cells in the grid
+     * Space: O(N) worst case, we need everything in the board, so N numbers of cells
+     * in the grid
+     * </p>
+     * @param board The 2D array of characters to be inputted.
+     * @param word Input string, word to search for.
+     * @return boolean value if word is in the grid.
+     */
+
+    public boolean wordSearch(char[][] board, String word){
+        for(int i = 0; i < board.length; i++){
+            for(int j = 0; j < board[i].length; j++){
+                if(board[i][j] == word.charAt(0) && wordHelperDFS(board, i, j, 0, word)){
+                    return true;
+                }
+            }
+        }return false;
+    }
+
+    public boolean wordHelperDFS(char[][] board, int i, int j, int count, String word){
+        if(count == word.length()) return true;
+        if(i < 0 || i >= board.length || j < 0 || j >= board[i].length || board[i][j] != word.charAt(count)){
+            return false;
+        }
+        char temp = board[i][j];
+        board[i][j] = ' ';
+        return wordHelperDFS(board, i + 1, j, count + 1, word) ||
+                wordHelperDFS(board, i, j + 1,count + 1, word) ||
+                wordHelperDFS(board, i - 1, j, count + 1, word) ||
+                wordHelperDFS(board, i, j - 1, count + 1, word);
+    }
     //------------------------------Binary Tree Questions-----------------------------------------------------------//
 
     /***
@@ -388,11 +427,15 @@ public class Solution{
 
     /***
      * LeetCode Medium, asked by Google
+     * <p>
      * Explanation: Find the longest consecutive sequence path from parent to child nodes.
      * Keep a list of maximum values and recursively check their values with the TreeNode values.
      * At each Node, check if its value is the same as the previous iteration Node + 1.
+     * </p>
+     * <p>
      * Runtime: O(N) Worst case, our binary tree is a long linked list of N nodes to traverse
      * Space: O(N) Recursive calls could also be N levels deep
+     * </p>
      * @param root Reference to the
      * @return
      */
