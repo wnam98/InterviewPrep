@@ -158,7 +158,11 @@ public class Solution{
                 wordHelperDFS(board, i, j - 1, count + 1, word);
     }
 
-    //min queens problem
+    /**
+     * N queens Problem, LeetCode Hard
+     * Runtime: O(N^N)
+     * Space: O(N * N)
+     */
     List<List<String>> res = new ArrayList<>();
     public List<List<String>> solveNQueens(int n) {
         placeQueen(new int[n][n], 0, new HashSet<>(), new HashSet<>(), new HashSet<>());
@@ -201,6 +205,40 @@ public class Solution{
             list.add(temp);
         }
         res.add(list);
+    }
+
+    /***Permutations, LeetCdde Medium
+     * Recursively swap places with the next element.
+     * @param nums Input array of nums to be swapped.
+     * @return List of lists of numbers that are permutations of the original.
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        //swap each element with each element after it
+        List<List<Integer>> result = new ArrayList<>();
+        helper(0, nums, result);
+        return result;
+    }
+
+    private void helper(int start, int[] nums, List<List<Integer>> result){
+        if(start == nums.length - 1){
+            ArrayList<Integer> list = new ArrayList<>();
+            for(int num: nums){
+                list.add(num);
+            }result.add(list);
+            return;
+        }
+
+        for(int i = start; i < nums.length; i++){
+            swap(nums, i, start);
+            helper(start + 1, nums, result);
+            swap(nums, i ,start);
+        }
+    }
+
+    private void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
     //------------------------------Binary Tree Questions-----------------------------------------------------------//
 
