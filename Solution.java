@@ -240,6 +240,20 @@ public class Solution{
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
+    /***
+     * LeetCode Easy: Sort both strings as char arrays and then check if they're the same
+     * @param s first input string
+     * @param t second input string
+     * @return boolean value of whether two strings are valid anagrams
+     */
+    public boolean isAnagram(String s, String t) {
+        char[] first = s.toCharArray();
+        char[] second = t.toCharArray();
+        Arrays.sort(first);
+        Arrays.sort(second);
+        return Arrays.equals(first, second);
+    }
     //------------------------------Binary Tree Questions-----------------------------------------------------------//
 
     /***
