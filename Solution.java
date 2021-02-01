@@ -4,8 +4,8 @@ public class Solution{
     //------------------------------Array Questions-----------------------------------------------------------//
     /***
      * LeetCode Easy, popular question asked by Google <p>
-     *Runtime: O(n) one for-loop that traverses through the elements of the array.
-     * Space: O(n) new hashset will add all values in nums in the worst case.</p>
+     *      *Runtime: O(n) one for-loop that traverses through the elements of the array.
+     *      * Space: O(n) new hashset will add all values in nums in the worst case.</p>
      *<p>
      * Explanation: Create a hashmap that maps the array elements to their indices. Then create
      * a new variable difference which is the difference between target and an element at a specific
@@ -26,6 +26,30 @@ public class Solution{
                 return solution;
             }map.put(i, nums[i]);
         }return solution;
+    }
+
+    /***
+     * LeetCode Easy, popular TwoSum with a twist, where the input array is sorted
+     * <p>
+     * Runtime: O(n) Worst case, the while loop will traverse through all the elements in the array
+     * Space: O(1) We're returning a data structure with constant space./p>
+     * <p>
+     * @param nums Sorted list of numbers.
+     * @param target Target sum of any two numbers in the above list.
+     * @return indices of the two numbers that add to target
+     */
+    public int[] newSum(int[] nums, int target){
+        int left = 0;
+        int right = nums.length - 1;
+        while(left < right){
+            int sum = nums[left] + nums[right];
+            if(sum > target) right--;
+            if(sum < target) left++;
+            if(sum == target){
+                return new int[]{left + 1, right + 1};
+            }
+        }
+        return new int[2];
     }
 
     /***
