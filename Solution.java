@@ -370,6 +370,22 @@ public class Solution{
     }
 
     /***
+     * Inorder traversal recursive solution
+     */
+    public List<Integer> inorderTraversal(TreeNode root){
+        return inorderHelper(root, new ArrayList<>());
+    }
+
+    public List<Integer> inorderHelper(TreeNode root, List<Integer> nodeList){
+        if(root != null){
+            inorderHelper(root.left, nodeList);
+            nodeList.add(root.val);
+            inorderHelper(root.right, nodeList);
+        }
+        return nodeList;
+    }
+
+    /***
      *LeetCode Medium, asked by Amazon, Linkedin, Google
      * <p>
      *  Explanation: Simple BFS solution, add all the nodes to a queue and return them to get the correct order.
