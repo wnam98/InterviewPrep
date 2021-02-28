@@ -24,7 +24,7 @@ public class Solution{
                 solution[0] = i;
                 solution[1] = map.get(difference);
                 return solution;
-            }map.put(i, nums[i]);
+            }map.put(nums[i], i);
         }return solution;
     }
 
@@ -370,7 +370,13 @@ public class Solution{
     }
 
     /***
-     * Inorder traversal recursive solution
+     * <p>
+     * Inorder traversal recursive solution. Given a binary tree, return a list of the nodes inorder.
+     * Runtime: O(N) where N is the number of nodes in the tree.
+     * Space: O(N) for the N nodes in the callstack.
+     * </p>
+     * @param root Root TreeNode of the tree.
+     * @return List of Nodes in order.
      */
     public List<Integer> inorderTraversal(TreeNode root){
         return inorderHelper(root, new ArrayList<>());
