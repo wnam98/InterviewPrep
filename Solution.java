@@ -278,6 +278,26 @@ public class Solution{
         Arrays.sort(second);
         return Arrays.equals(first, second);
     }
+
+    /**
+     * Slalom Build Interview Question, my solution
+     *LeetCode Easy: Find the longest common prefix from a list of strings
+     * @param list List of strings
+     * @return prefix string
+     * */
+
+    public String LongestCommonPrefix(List<String> list){
+        if(list.size() == 0) return "";
+        String prefix = list.get(0);
+        for(int i = 0; i < list.size(); i++){
+            while(list.get(i).indexOf(prefix) != 0){
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if(prefix.isEmpty()) return "";
+            }
+        }
+        return prefix;
+    }
+
     //------------------------------Binary Tree Questions-----------------------------------------------------------//
 
     /***
@@ -786,11 +806,17 @@ public class Solution{
         int[] array = {1,2,3,4,5};
         int target = 7;
 
+        List<String> strings = new ArrayList<>();
+        strings.add("boat");
+        strings.add("boar");
+        strings.add("board");
+
         Solution solution = new Solution();
         System.out.println(Arrays.toString(solution.twoSum(array, target)));
 
         int k = 2;
         solution.rotateArray(array, k);
         System.out.println(Arrays.toString(array));
+        System.out.println(solution.LongestCommonPrefix(strings));
     }
 }
