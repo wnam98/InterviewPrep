@@ -231,7 +231,7 @@ public class Solution{
         res.add(list);
     }
 
-    /***Permutations, LeetCdde Medium
+    /***Permutations, LeetCode Medium
      * Recursively swap places with the next element.
      * @param nums Input array of nums to be swapped.
      * @return List of lists of numbers that are permutations of the original.
@@ -830,7 +830,22 @@ public class Solution{
     }
 
 
-    //----------------N-Ary Tree Questions----------------------------
+    //----------------N-Ary Tree Questions-------------------------------------------
+
+    public class N_Node{
+        public int val;
+        public List<N_Node> children;
+        public N_Node(){}
+        public N_Node(int _val){
+            val = _val;
+        }
+        public N_Node(int _val, List<N_Node> _children){
+            val = _val;
+            children = _children;
+        }
+    };
+
+
 
     /***
      * Driver method
