@@ -632,7 +632,7 @@ public class Solution{
     }
 
     /***
-     * LeetCode Easy, asked by Amazon, failed by JomaTech
+     * LeetCode Easy, asked by Amazon, failed by JomaTech lol
      * <p>
      * Explanation: Basic traversal, head = head.next until reaching null. First, have access to a previous node,
      * so create a reference and set it to null (because there's nothing previous to the first node). Now set the
@@ -660,6 +660,36 @@ public class Solution{
             head = next;
         }return prev;
     }
+
+    
+    /***
+     * LeetCode Easy, same question as above but recursive.
+     * <p>
+     * Explanation: First, check for edge cases of a null list or a list of size 1.
+     * 
+     *<p>
+     * reversed -> <- head.next;
+     * head.next.next -> head;
+     * head.next -> null, so return reversed.
+     *</p>
+     * <p>
+     * Runtime: O(N) where N is the number of nodes in the list.
+     * Space: O(1) all the reversing is done in-place. </p>
+     * </p>
+     * @param head reference to first ListNode in the list.
+     * @return reversed LinkedList
+     */
+
+    public ListNode reverseListRecursive(ListNode head){
+        if(head == null || head.next == null)
+            return head;
+
+        ListNode reversed = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return reversed;
+    }
+
 
     /***
      * LeetCode Hard, popular question asked by Facebook
@@ -798,6 +828,9 @@ public class Solution{
         newNode.neighbors = neighbors;
         return newNode;
     }
+
+
+    //----------------N-Ary Tree Questions----------------------------
 
     /***
      * Driver method
